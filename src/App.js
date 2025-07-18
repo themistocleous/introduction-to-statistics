@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ns_png from './images/ns.png';
+import ThemeSwitcher from './themeSwitcher';
+import HomePage from './homepage';
+import { PageShell } from './PageShell';
+
 // --- Main App Component ---
 // This component manages the navigation and renders the currently active page.
 const App = () => {
@@ -34,7 +37,7 @@ const App = () => {
     };
 
     return (
-        <div className="bg-gray-50 text-gray-800 min-h-screen">
+         <div className="bg-background text-foreground min-h-screen">
             <Navbar navigateTo={navigateTo} currentPage={currentPage} />
             <main className="container mx-auto px-6 py-12">
                 {renderPage()}
@@ -61,17 +64,18 @@ const Navbar = ({ navigateTo, currentPage }) => {
         <a
             href="#"
             onClick={(e) => { e.preventDefault(); navigateTo(pageKey); setMobileMenuOpen(false); }}
-            className={`block md:inline-block px-3 py-2 rounded-md text-sm font-medium ${currentPage === pageKey ? 'bg-indigo-100 text-indigo-700' : 'text-gray-600 hover:bg-gray-100 hover:text-blue-600'}`}
+            className={`block md:inline-block px-3 py-2 rounded-md text-sm font-medium ${currentPage === pageKey ? 'bg-primary/20 text-primary' : 'text-muted hover:bg-card hover:text-primary'}`}
         >
             {label}
         </a>
     );
 
     return (
-        <header className="bg-white shadow-md sticky top-0 z-50">
+        <header className="bg-card shadow-md sticky top-0 z-50 border-b border-border">
             <nav className="container mx-auto px-6 py-4">
                 <div className="flex justify-between items-center">
-                    <div className="text-2xl font-bold text-gray-900">
+                    <div className="text-2xl font-bold text-foreground"> {/* Changed from text-gray-900 */}
+                    <ThemeSwitcher />
                         <a href="#" onClick={(e) => { e.preventDefault(); navigateTo('home'); }}>Intro to Stats</a>
                     </div>
                     <div className="hidden md:flex items-center space-x-2">
@@ -93,27 +97,27 @@ const Navbar = ({ navigateTo, currentPage }) => {
 
 // --- Footer Component ---
 const Footer = () => (
-    <footer className="bg-gray-800 text-white mt-16">
+    <footer className="bg-gray-800 text-white dark:bg-gray-950 dark:text-gray-50 mt-16"> {/* Added dark: variants for better contrast */}
         <div className="container mx-auto px-6 py-8 text-center">
-            <p>&copy; 2025 <a href='https://www.uv.uio.no/isp/'>Institute of Special Needs Education</a>, <a href='https://www.uv.uio.no/english/'>Faculty of Educational Sciences</a>, <a href='https://www.uio.no/english/'>University of Oslo</a>.</p>
-            <p className="text-gray-400 mt-2">Developed by Charalambos Themistocleous</p>
+            <p>© 2025 <a href='https://www.uv.uio.no/isp/'>Institute of Special Needs Education</a>, <a href='https://www.uv.uio.no/english/'>Faculty of Educational Sciences</a>, <a href='https://www.uio.no/english/'>University of Oslo</a>.</p>
+            <p className="text-gray-400 dark:text-gray-500 mt-2">Developed by Charalambos Themistocleous</p> {/* Adjusted for visibility */}
         </div>
     </footer>
 );
 
 // --- Page Components ---
 
-const HomePage = ({ navigateTo }) => (
-    <section className="text-center">
-        <h1 className="text-4xl md:text-5xl font-boldt text-blue-400">Welcome to Introduction to Statistics</h1>
-        <p className="text-xl text-gray-700 mb-6">Learn the foundations of statistics with a focus on educational research.</p>
-        <img  src={ns_png} alt="Statistics Illustration" className="mx-auto mb-6 w-1/4 md:w-1/2 rounded-lg shadow-lg"></img>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8"><a href='https://www.uv.uio.no/isp/'>Institute of Special Needs Education</a>, <a href='https://www.uv.uio.no/english/'>Faculty of Educational Sciences</a>, <a href='https://www.uio.no/english/'>University of Oslo</a></p>
-        <button onClick={() => navigateTo('research-questions')} className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-md hover:bg-blue-700 transition duration-300">
-            Get Started
-        </button>
-    </section>
-);
+// const HomePage = ({ navigateTo }) => (
+//     <section className="text-center">
+//         <h1 className="text-5xl font-bold text-primary-color">Welcome to Introduction to Statistics</h1>
+//         <p className="text-xl text-gray-700 mb-6">Learn the foundations of statistics with a focus on educational research.</p>
+//         <img src={ns_png} alt="Statistics Illustration" className="mx-auto mb-6 w-1/5 md:w-1/4 rounded-lg shadow-lg" />
+//         <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8"><a href='https://www.uv.uio.no/isp/'>Institute of Special Needs Education</a>, <a href='https://www.uv.uio.no/english/'>Faculty of Educational Sciences</a>, <a href='https://www.uio.no/english/'>University of Oslo</a></p>
+//         <button onClick={() => navigateTo('research-questions')} className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-md hover:bg-blue-700 transition duration-300">
+//             Get Started
+//         </button>
+//     </section>
+// );
 
 const ResearchQuestionsPage = () => (
     <PageShell title="1. Formulation of Research Questions">
@@ -137,15 +141,16 @@ summary(student_data)
 
 const FoundationsPage = () => (
     <PageShell title="2. Review of Measurement Scales, Averages, and Graphs">
-        <h3 className="text-xl font-semibold mt-6 mb-4">Measurement Scales</h3>
-        <ul>
-            <li><strong>Nominal:</strong> Categorical data without an intrinsic order (e.g., gender, teaching method).</li>
-            <li><strong>Ordinal:</strong> Categorical data with a meaningful order but unequal intervals (e.g., satisfaction ratings from 'low' to 'high').</li>
-            <li><strong>Interval:</strong> Numerical data with equal intervals but no true zero (e.g., temperature in Celsius).</li>
-            <li><strong>Ratio:</strong> Numerical data with equal intervals and a true zero (e.g., height, weight, test scores).</li>
+        <h3 className="text-xl text-foreground font-semibold mt-6 mb-4">Measurement Scales</h3>
+        <ul class="text-foreground">
+            <li><strong class="text-foreground">Nominal:</strong> Categorical data without an intrinsic order (e.g., gender, teaching method).</li>
+            <li><strong class="text-foreground">Ordinal:</strong> Categorical data with a meaningful order but unequal intervals (e.g., satisfaction ratings from 'low' to 'high').</li>
+            <li><strong class="text-foreground">Interval:</strong> Numerical data with equal intervals but no true zero (e.g., temperature in Celsius).</li>
+            <li><strong class="text-foreground">Ratio:</strong> Numerical data with equal intervals and a true zero (e.g., height, weight, test scores).</li>
         </ul>
-        <h3 className="text-xl font-semibold mt-6 mb-4">Averages and Standard Deviations</h3>
-        <p>The <strong>mean</strong> (average) is the sum of all values divided by the number of values. The <strong>median</strong> is the middle value. The <strong>mode</strong> is the most frequent value. The <strong>standard deviation</strong> measures the amount of variation or dispersion of a set of values.</p>
+        <h3 className="text-xl font-semibold mt-6 mb-4 text-foreground">Averages and Standard Deviations</h3>
+        <p class="text-foreground">The <strong class="text-foreground">mean</strong> (average) is the sum of all values divided by the number of values. The <strong class="text-foreground">median</strong> is the middle value. The <strong class="text-foreground">mode</strong> is the most frequent value. The <strong class="text-foreground">standard deviation</strong> measures the amount of variation or dispersion of a set of values.</p>
+        
         <CodeBlock language="r" code={`
 # Calculate mean and standard deviation for test scores
 # Assuming student_data from the previous section is loaded
@@ -167,16 +172,16 @@ boxplot(test_score ~ teaching_method, data = student_data,
 
 const ProbabilityPage = () => (
     <PageShell title="3. Probability and the Normal Distribution">
-        <p><strong>Probability</strong> is the measure of the likelihood that an event will occur. The <strong>normal distribution</strong> is a fundamental concept in statistics. It's a bell-shaped curve where most of the data clusters around the mean.</p>
-        <p>Use the sliders below to see how changing the <strong>mean</strong> (the center of the distribution) and the <strong>standard deviation</strong> (the spread of the distribution) affects the shape of the normal curve.</p>
+        <p><strong class="text-foreground">Probability</strong> is the measure of the likelihood that an event will occur. The <strong class="text-foreground">normal distribution</strong> is a fundamental concept in statistics. It's a bell-shaped curve where most of the data clusters around the mean.</p>
+        <p>Use the sliders below to see how changing the <strong class="text-foreground">mean</strong> (the center of the distribution) and the <strong class="text-foreground">standard deviation</strong> (the spread of the distribution) affects the shape of the normal curve.</p>
         <InteractiveNormalDistribution />
     </PageShell>
 );
 
 const ComparisonsPage = () => (
      <PageShell title="5. Comparison of Groups or Time Points">
-        <p>A common task is to compare groups. For two groups, we often use a <strong>t-test</strong> to determine if the difference between their means is statistically significant. For more than two groups, we use <strong>ANOVA (Analysis of Variance)</strong>.</p>
-        <h3 className="text-xl font-semibold mt-6 mb-4">Example in R (T-test)</h3>
+        <p>A common task is to compare groups. For two groups, we often use a <strong class="text-foreground">t-test</strong> to determine if the difference between their means is statistically significant. For more than two groups, we use <strong class="text-foreground">ANOVA (Analysis of Variance)</strong>.</p>
+        <h3 className="text-xl font-semibold mt-6 mb-4 text-foreground">Example in R (T-test)</h3>
         <CodeBlock language="r" code={`
 # Perform an independent samples t-test
 ttest_result <- t.test(test_score ~ teaching_method, data = student_data)
@@ -190,7 +195,7 @@ print(ttest_result)
 
 const RelationshipsPage = () => (
     <PageShell title="6. Relationships Between Numerical Variables: Correlation">
-        <p><strong>Correlation</strong> measures the strength and direction of a linear relationship between two numerical variables. The correlation coefficient (r) ranges from -1 to +1. A value of +1 indicates a perfect positive linear relationship, -1 a perfect negative linear relationship, and 0 no linear relationship.</p>
+        <p><strong class="text-foreground">Correlation</strong> measures the strength and direction of a linear relationship between two numerical variables. The correlation coefficient (r) ranges from -1 to +1. A value of +1 indicates a perfect positive linear relationship, -1 a perfect negative linear relationship, and 0 no linear relationship.</p>
         <CodeBlock language="r" code={`
 # Let's add another variable: hours studied
 set.seed(42) # for reproducibility
@@ -213,7 +218,7 @@ print(correlation_result)
 const ReportingPage = () => (
     <PageShell title="7. How to Recognize, Interpret, and Report Statistical Analyses">
         <p>Reporting statistical results clearly is a crucial skill. When reporting a t-test, for example, you should include the means and standard deviations for each group, the t-statistic, degrees of freedom, and the p-value.</p>
-        <p><strong>Example Report:</strong> "An independent-samples t-test was conducted to compare test scores for students taught with Method A and Method B. There was a significant difference in scores for Method A (M=85.1, SD=4.9) and Method B (M=88.2, SD=5.1); t(98) = -3.0, p &lt; .01. These results suggest that students taught with Method B scored significantly higher than those taught with Method A."</p>
+        <p><strong class="text-foreground">Example Report:</strong> "An independent-samples t-test was conducted to compare test scores for students taught with Method A and Method B. There was a significant difference in scores for Method A (M=85.1, SD=4.9) and Method B (M=88.2, SD=5.1); t(98) = -3.0, p &lt; .01. These results suggest that students taught with Method B scored significantly higher than those taught with Method A."</p>
         <GeminiReportInterpreter />
     </PageShell>
 );
@@ -221,12 +226,12 @@ const ReportingPage = () => (
 const ExamPrepPage = () => (
     <PageShell title="8. Important Points and Exam Preparation">
         <ul>
-            <li><strong>Understand the Concepts:</strong> Don't just memorize R code. Understand the concepts behind the tests. Why a t-test? Why a correlation?</li>
-            <li><strong>Check Assumptions:</strong> Many statistical tests have assumptions (e.g., normal distribution). Know what they are.</li>
-            <li><strong>Correlation is Not Causation:</strong> Just because two variables are correlated does not mean one causes the other.</li>
-            <li><strong>Practice:</strong> The best way to learn is by doing. Work through problems, analyze datasets, and practice interpreting the output.</li>
+            <li><strong class="text-foreground">Understand the Concepts:</strong> Don't just memorize R code. Understand the concepts behind the tests. Why a t-test? Why a correlation?</li>
+            <li><strong class="text-foreground">Check Assumptions:</strong> Many statistical tests have assumptions (e.g., normal distribution). Know what they are.</li>
+            <li><strong class="text-foreground">Correlation is Not Causation:</strong> Just because two variables are correlated does not mean one causes the other.</li>
+            <li><strong class="text-foreground">Practice:</strong> The best way to learn is by doing. Work through problems, analyze datasets, and practice interpreting the output.</li>
         </ul>
-        <div className="mt-6 bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded-md">
+        <div className="mt-6 p-4 border-l-4 rounded-md bg-blue-100 border-blue-500 text-blue-700 dark:bg-blue-900/50 dark:border-blue-400 dark:text-blue-200">
             <p className="font-bold">Good luck with your studies and the exam!</p>
         </div>
     </PageShell>
@@ -234,20 +239,12 @@ const ExamPrepPage = () => (
 
 // --- Reusable & Helper Components ---
 
-// A wrapper for consistent page styling
-const PageShell = ({ title, children }) => (
-    <section className="bg-white p-8 rounded-xl shadow-lg">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">{title}</h2>
-        <div className="prose text-gray-700 max-w-none">
-            {children}
-        </div>
-    </section>
-);
+
 
 // A component for displaying formatted code blocks
 const CodeBlock = ({ language, code }) => (
     <div className="my-6">
-        <pre className="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">
+        <pre className="bg-gray-800 text-white dark:bg-gray-900 dark:text-gray-50 p-4 rounded-lg overflow-x-auto"> {/* Slight adjustment for darker in dark mode */}
             <code className={`language-${language}`}>
                 {code.trim()}
             </code>
@@ -265,7 +262,7 @@ const InteractiveNormalDistribution = () => {
         if (d3Container.current && window.d3) {
             const d3 = window.d3;
             const svg = d3.select(d3Container.current);
-            svg.selectAll("*").remove(); // Clear SVG before redrawing
+            svg.selectAll("*").remove();
 
             const margin = { top: 20, right: 30, bottom: 40, left: 40 };
             const width = d3Container.current.clientWidth - margin.left - margin.right;
@@ -289,7 +286,7 @@ const InteractiveNormalDistribution = () => {
             // Y-axis
             g.append("g")
                 .call(d3.axisLeft(y));
-             g.append("text")
+            g.append("text")
                 .attr("text-anchor", "end")
                 .attr("transform", "rotate(-90)")
                 .attr("y", -margin.left + 15)
@@ -305,32 +302,34 @@ const InteractiveNormalDistribution = () => {
                 .x(d => x(d.x))
                 .y(d => y(d.y));
 
+            // Use CSS variable for stroke
+            const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
+
             g.append("path")
                 .datum(data)
                 .attr("fill", "none")
-                .attr("stroke", "#4f46e5")
+                .attr("stroke", primaryColor)
                 .attr("stroke-width", 2.5)
                 .attr("d", line);
         }
-    }, [mean, sd, d3Container.current]); // Redraw on parameter change or resize
+    }, [mean, sd]); // Removed d3Container.current from deps to avoid infinite loop; redraw on param change
 
     return (
-        <div className="mt-8 p-6 bg-gray-50 rounded-lg border">
+        <div className="mt-8 p-6 bg-gray-50 rounded-lg border border-border dark:bg-gray-800 dark:border-gray-700"> {/* Made theme-aware */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label htmlFor="mean-slider" className="block text-sm font-medium text-gray-700">Mean: {mean}</label>
-                    <input id="mean-slider" type="range" min="-5" max="5" step="0.1" value={mean} onChange={(e) => setMean(parseFloat(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                    <label htmlFor="mean-slider" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Mean: {mean}</label>
+                    <input id="mean-slider" type="range" min="-5" max="5" step="0.1" value={mean} onChange={(e) => setMean(parseFloat(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" />
                 </div>
                 <div>
-                    <label htmlFor="sd-slider" className="block text-sm font-medium text-gray-700">Standard Deviation: {sd}</label>
-                    <input id="sd-slider" type="range" min="0.5" max="3" step="0.1" value={sd} onChange={(e) => setSd(parseFloat(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                    <label htmlFor="sd-slider" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Standard Deviation: {sd}</label>
+                    <input id="sd-slider" type="range" min="0.5" max="3" step="0.1" value={sd} onChange={(e) => setSd(parseFloat(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" />
                 </div>
             </div>
-            <svg ref={d3Container} className="w-full h-[300px] rounded-lg bg-white border" />
+            <svg ref={d3Container} className="w-full h-[300px] rounded-lg bg-white border border-border dark:bg-gray-900 dark:border-gray-700" />
         </div>
     );
 };
-
 // --- Gemini API Feature Components ---
 const GeminiResearchQuestionGenerator = () => {
     const [topic, setTopic] = useState('');
@@ -339,11 +338,11 @@ const GeminiResearchQuestionGenerator = () => {
 
     const handleClick = async () => {
         if (!topic.trim()) {
-            setOutput('<p class="text-red-600">Please enter a topic.</p>');
+            setOutput('<p class="text-red-600 dark:text-red-400">Please enter a topic.</p>');
             return;
         }
         if (typeof window.markdownit !== 'function') {
-            setOutput('<p class="text-red-600">Error: Markdown library not loaded.</p>');
+            setOutput('<p class="text-red-600 dark:text-red-400">Error: Markdown library not loaded.</p>');
             return;
         }
         const md = window.markdownit();
@@ -354,28 +353,27 @@ const GeminiResearchQuestionGenerator = () => {
             const text = await callGemini(prompt);
             setOutput(md.render(text));
         } catch (error) {
-            setOutput('<p class="text-red-600">Sorry, there was an error. Please try again.</p>');
+            setOutput('<p class="text-red-600 dark:text-red-400">Sorry, there was an error. Please try again.</p>');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="mt-8 p-6 bg-indigo-50 rounded-lg border border-indigo-200">
-            <h3 className="text-xl font-semibold text-indigo-800 mb-4">✨ Research Question Generator</h3>
-            <p className="text-indigo-700 mb-4">Enter a topic below, and our AI assistant will help you draft some testable research questions.</p>
+        <div className="mt-8 p-6 bg-indigo-50 rounded-lg border border-indigo-200 dark:bg-indigo-950/30 dark:border-indigo-700">
+            <h3 className="text-xl font-semibold text-indigo-800 dark:text-indigo-200 mb-4">✨ Research Question Generator</h3>
+            <p className="text-indigo-700 dark:text-indigo-300 mb-4">Enter a topic below, and our AI assistant will help you draft some testable research questions.</p>
             <div className="flex flex-col sm:flex-row gap-2">
-                <input type="text" value={topic} onChange={e => setTopic(e.target.value)} className="flex-grow p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="e.g., 'student anxiety and exam performance'" />
-                <button onClick={handleClick} disabled={loading} className="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300 flex items-center justify-center disabled:bg-indigo-400">
+                <input type="text" value={topic} onChange={e => setTopic(e.target.value)} className="flex-grow p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:border-gray-600 dark:focus:ring-indigo-400 dark:bg-gray-800 dark:text-gray-200" placeholder="e.g., 'student anxiety and exam performance'" />
+                <button onClick={handleClick} disabled={loading} className="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300 flex items-center justify-center disabled:bg-indigo-400 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:disabled:bg-indigo-600">
                     {loading ? 'Generating...' : 'Generate Questions'}
                 </button>
             </div>
             {loading && <div className="loader mx-auto my-4"></div>}
-            {output && <div className="mt-4 p-4 bg-white rounded-md border border-gray-200 prose max-w-none" dangerouslySetInnerHTML={{ __html: output }} />}
+            {output && <div className="mt-4 p-4 bg-white rounded-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700 prose max-w-none" dangerouslySetInnerHTML={{ __html: output }} />}
         </div>
     );
 };
-
 const GeminiReportInterpreter = () => {
     const [rOutput, setROutput] = useState('');
     const [interpretation, setInterpretation] = useState('');
@@ -383,11 +381,11 @@ const GeminiReportInterpreter = () => {
 
     const handleClick = async () => {
         if (!rOutput.trim()) {
-            setInterpretation('<p class="text-red-600">Please paste your R output.</p>');
+            setInterpretation('<p class="text-red-600 dark:text-red-400">Please paste your R output.</p>');
             return;
         }
         if (typeof window.markdownit !== 'function') {
-            setInterpretation('<p class="text-red-600">Error: Markdown library not loaded.</p>');
+            setInterpretation('<p class="text-red-600 dark:text-red-400">Error: Markdown library not loaded.</p>');
             return;
         }
         const md = window.markdownit();
@@ -398,26 +396,25 @@ const GeminiReportInterpreter = () => {
             const text = await callGemini(prompt);
             setInterpretation(md.render(text));
         } catch (error) {
-            setInterpretation('<p class="text-red-600">Sorry, there was an error. Please try again.</p>');
+            setInterpretation('<p class="text-red-600 dark:text-red-400">Sorry, there was an error. Please try again.</p>');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="mt-8 p-6 bg-teal-50 rounded-lg border border-teal-200">
-            <h3 className="text-xl font-semibold text-teal-800 mb-4">✨ Statistical Output Interpreter</h3>
-            <p className="text-teal-700 mb-4">Paste your statistical test results below to get a plain-language explanation.</p>
-            <textarea value={rOutput} onChange={e => setROutput(e.target.value)} className="w-full p-2 border border-gray-300 rounded-md h-40 focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="Paste your R output here..."></textarea>
-            <button onClick={handleClick} disabled={loading} className="mt-2 bg-teal-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-teal-700 transition duration-300 flex items-center justify-center disabled:bg-teal-400">
+        <div className="mt-8 p-6 bg-teal-50 rounded-lg border border-teal-200 dark:bg-teal-950/30 dark:border-teal-700">
+            <h3 className="text-xl font-semibold text-teal-800 dark:text-teal-200 mb-4">✨ Statistical Output Interpreter</h3>
+            <p className="text-teal-700 dark:text-teal-300 mb-4">Paste your statistical test results below to get a plain-language explanation.</p>
+            <textarea value={rOutput} onChange={e => setROutput(e.target.value)} className="w-full p-2 border border-gray-300 rounded-md h-40 focus:ring-2 focus:ring-teal-500 focus:outline-none dark:border-gray-600 dark:focus:ring-teal-400 dark:bg-gray-800 dark:text-gray-200" placeholder="Paste your R output here..."></textarea>
+            <button onClick={handleClick} disabled={loading} className="mt-2 bg-teal-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-teal-700 transition duration-300 flex items-center justify-center disabled:bg-teal-400 dark:bg-teal-500 dark:hover:bg-teal-400 dark:disabled:bg-teal-600">
                 {loading ? 'Interpreting...' : 'Interpret Results'}
             </button>
             {loading && <div className="loader mx-auto my-4"></div>}
-            {interpretation && <div className="mt-4 p-4 bg-white rounded-md border border-gray-200 prose max-w-none" dangerouslySetInnerHTML={{ __html: interpretation }} />}
+            {interpretation && <div className="mt-4 p-4 bg-white rounded-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700 prose max-w-none" dangerouslySetInnerHTML={{ __html: interpretation }} />}
         </div>
     );
 };
-
 // --- Gemini API Call Function ---
 async function callGemini(prompt) {
     let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
