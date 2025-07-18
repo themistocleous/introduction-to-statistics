@@ -20,7 +20,7 @@ Think of statistics not as a class you have to take, but as a practical skill yo
 
 *Program Evaluation:* Your school district implements a new anti-bullying program. How can you determine with confidence whether it has reduced bullying incidents?
 
-*In Psychology: *
+*In Psychology:*
 
 *Treatment Efficacy:* Does cognitive-behavioral therapy (CBT) lead to a significant reduction in anxiety symptoms compared to a placebo or another form of therapy?
 
@@ -34,7 +34,7 @@ In all these cases, personal intuition or simple observation isn't enough. We ne
 
 ## What Are Statistics?
 
-At its core, statistics is the science of learning from data. It's a set of tools that helps us collect, analyze, interpret, and present information. Think of it as a detective's toolkit for finding clues and patterns in a sea of information. 🕵️
+At its core, statistics is the science of learning from data. It's a set of tools that helps us collect, analyze, interpret, and present information. Think of it as a detective's toolkit for finding clues and patterns in a sea of information.
 
 Statistics are generally broken down into two main areas:
 
