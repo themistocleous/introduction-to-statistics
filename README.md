@@ -1,3 +1,7 @@
+![stats](ns.png)
+
+# Introduction to Statistics
+
 Welcome! If you’ve ever wondered how we know if a new teaching method is truly effective, or if a particular therapy actually helps people, then you’ve already been thinking like a statistician. Statistics isn't just about math; it's a powerful toolkit for answering questions and understanding the world, especially in fields like education and psychology that are centered on people. This website aims to support my students at the <a href="https://uio.instructure.com/courses/59762">**RSNE4013 25H Basic concepts in Statistics course**</a>, Department of Special Needs, University of Oslo, offering an interactive environment for learning.
 
 Haris Themistocleous
@@ -6,7 +10,7 @@ Haris Themistocleous
 
 Think of statistics not as a class you have to take, but as a practical skill you will use throughout your career. Here are a few examples of questions you'll be able to answer:
 
-*In Education:* 🍎
+*In Education:* 
 
 *Effectiveness:* Does a new reading program actually improve student literacy scores, or is it just as good as the old one?
 
@@ -16,7 +20,7 @@ Think of statistics not as a class you have to take, but as a practical skill yo
 
 *Program Evaluation:* Your school district implements a new anti-bullying program. How can you determine with confidence whether it has reduced bullying incidents?
 
-*In Psychology: *🧠
+*In Psychology: *
 
 *Treatment Efficacy:* Does cognitive-behavioral therapy (CBT) lead to a significant reduction in anxiety symptoms compared to a placebo or another form of therapy?
 
@@ -30,7 +34,7 @@ In all these cases, personal intuition or simple observation isn't enough. We ne
 
 ## What Are Statistics?
 
-At its core, statistics is the science of learning from data. It's a set of tools that helps us collect, analyze, interpret, and present information. Think of it as a detective's toolkit for finding clues and patterns in a sea of information. 🕵️‍♀️
+At its core, statistics is the science of learning from data. It's a set of tools that helps us collect, analyze, interpret, and present information. Think of it as a detective's toolkit for finding clues and patterns in a sea of information. 🕵️
 
 Statistics are generally broken down into two main areas:
 
