@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@r-wasm/webr": "^0.2.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -21,7 +22,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "tailwind:init": "tailwindcss init -p"
+    "tailwind:init": "tailwindcss init -p",
+    "postinstall": "rm -rf public/webr && mkdir -p public/webr && cp -r node_modules/@r-wasm/webr/dist/* public/webr/"
   },
   "eslintConfig": {
     "extends": [

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ThemeSwitcher from './themeSwitcher';
-import HomePage from './homepage';
+import HomePage from './pages/homepage';
+import Introduction from './pages/introduction';
 import { PageShell } from './PageShell';
 
 // --- Main App Component ---
@@ -17,6 +18,8 @@ const App = () => {
         switch (currentPage) {
             case 'home':
                 return <HomePage navigateTo={navigateTo} />;
+            case 'introduction':
+                return <Introduction />;    
             case 'research-questions':
                 return <ResearchQuestionsPage />;
             case 'foundations':
@@ -51,6 +54,8 @@ const App = () => {
 const Navbar = ({ navigateTo, currentPage }) => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const links = [
+        { key: 'home', label: 'Home' },
+        { key: 'introduction', label: 'Introduction' },
         { key: 'research-questions', label: 'Research Questions' },
         { key: 'foundations', label: 'Foundations' },
         { key: 'probability', label: 'Probability' },

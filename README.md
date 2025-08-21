@@ -10,7 +10,7 @@ Haris Themistocleous
 
 Think of statistics not as a class you have to take, but as a practical skill you will use throughout your career. Here are a few examples of questions you'll be able to answer:
 
-*In Education:* 
+*In Education* 
 
 *Effectiveness:* Does a new reading program actually improve student literacy scores, or is it just as good as the old one?
 
@@ -20,7 +20,7 @@ Think of statistics not as a class you have to take, but as a practical skill yo
 
 *Program Evaluation:* Your school district implements a new anti-bullying program. How can you determine with confidence whether it has reduced bullying incidents?
 
-*In Psychology:*
+*In Special Needs Education and Psychology*
 
 *Treatment Efficacy:* Does cognitive-behavioral therapy (CBT) lead to a significant reduction in anxiety symptoms compared to a placebo or another form of therapy?
 

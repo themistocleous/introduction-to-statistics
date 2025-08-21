@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ns_png from './images/ns.png';
-import { PageShell } from './PageShell';
+import ns_png from '../images/ns.png';
+import { PageShell } from '../PageShell';
 
 const HomePage = ({ navigateTo }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // Fixed: Added mousePosition variable
