@@ -72,6 +72,13 @@ const HomePage = ({ navigateTo }) => {
             <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-blue-400 dark:via-purple-400 dark:to-blue-500 bg-clip-text text-transparent mb-4 animate-fade-in">
               Welcome
             </h1>
+            <a
+  href={(process.env.PUBLIC_URL || "") + "/webr/webr-worker.js"}
+  target="_blank"
+  rel="noreferrer"
+>
+  Open webr-worker.js (new tab)
+</a>
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-600 via-blue-600 to-purple-600 dark:from-indigo-400 dark:via-blue-400 dark:to-purple-500 bg-clip-text text-transparent animate-fade-in-delay">
               Introduction to Statistics
             </h1>

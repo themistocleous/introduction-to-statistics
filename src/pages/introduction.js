@@ -1,109 +1,81 @@
-"use client"; // keep if you’re in Next.js
-
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { PageShell } from "../PageShell";
 import { WebR } from "@r-wasm/webr";
 
 const Introduction = () => {
-  const webRRef = useRef(null);
-  const initializedRef = useRef(false);
-  const [ready, setReady] = useState(false);
-  const [msg, setMsg] = useState("Loading webR…");
-
   useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      if (initializedRef.current) return;
-      initializedRef.current = true;
-      try {
-        // IMPORTANT: point to your own /webr/ folder
-        const webR = new WebR({ baseUrl: "/webr/" });
-        await webR.init();
-        if (!cancelled) {
-          webRRef.current = webR;
-          setReady(true);
-          setMsg("webR is ready. Type code and click Run.");
+    const init = async () => {
+      const webR = new WebR();
+      await webR.init();
+
+      const runBtn = document.getElementById("runR");
+      const output = document.getElementById("rOutput");
+      const canvas = document.getElementById("rPlot");
+
+      runBtn.onclick = async () => {
+        const code = document.getElementById("rCode").value;
+        const shelter = await new webR.Shelter();
+        const capture = await shelter.captureR(`
+          webr::canvas(width=640, height=480)
+          ${code}
+          dev.off()
+        `);
+
+        // show text output
+        const lines = capture.output
+          .filter((x) => x.type === "stdout")
+          .map((x) => x.data);
+        output.textContent = lines.join("\n") || "[no console output]";
+
+        // show first plot (if any)
+        if (capture.images.length) {
+          const img = capture.images[0];
+          canvas.width = img.width;
+          canvas.height = img.height;
+          canvas.getContext("2d").drawImage(img, 0, 0);
         }
-      } catch (e) {
-        if (!cancelled) setMsg(`Failed to load webR: ${e?.message || e}`);
-        console.error(e);
-      }
-    })();
-    return () => { cancelled = true; };
+        shelter.purge();
+      };
+
+      output.textContent = "webR is ready. Type some R code and click Run!";
+    };
+
+    init();
   }, []);
-
-  const onRun = async () => {
-    const outEl = document.getElementById("rOutput");
-    const imgEl = document.getElementById("rPlotImg");
-    const code = document.getElementById("rCode").value;
-
-    if (!webRRef.current) {
-      outEl.textContent = "webR is still loading…";
-      return;
-    }
-
-    try {
-      const webR = webRRef.current;
-
-      // Capture console output and an image without using <canvas>
-      const capture = await webR.captureR(
-        `
-        webr::canvas(width=640, height=480)
-        ${code}
-        dev.off()
-        `,
-        { withAutoprint: true }
-      );
-
-      // stdout + messages
-      const lines = capture.output
-        .filter(x => x.type === "stdout" || x.type === "message")
-        .map(x => x.data.trim())
-        .filter(Boolean);
-      outEl.textContent = lines.length ? lines.join("\n") : "[no console output]";
-
-      // Show the first plot as an <img>, avoiding canvas security issues
-      if (capture.images.length) {
-        const bmp = capture.images[0];               // ImageBitmap
-        // Convert ImageBitmap -> Blob -> Object URL for <img>
-        const off = new OffscreenCanvas(bmp.width, bmp.height);
-        const ctx = off.getContext("2d");
-        ctx.drawImage(bmp, 0, 0);
-        const blob = await off.convertToBlob();      // no pixel reads; safe
-        const url = URL.createObjectURL(blob);
-        imgEl.src = url;
-      } else {
-        imgEl.removeAttribute("src");
-      }
-    } catch (e) {
-      outEl.textContent = `R error: ${e?.message || e}`;
-      console.error(e);
-    }
-  };
 
   return (
     <PageShell>
-      {/* your heading + text … */}
+      <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-blue-400 dark:via-purple-400 dark:to-blue-500 bg-clip-text text-transparent mb-4 animate-fade-in">
+        Introduction to Statistics
+      </h1>
 
-      <h2 className="mt-8 font-semibold">Try it yourself</h2>
+      <p>
+        Welcome!
+      </p>
+
+      {/* --- R playground --- */}
+      <h2 className="mt-8 font-semibold text-gray-800 dark:text-gray-80">
+        Try it yourself
+      </h2>
       <textarea
         id="rCode"
         rows="6"
-        defaultValue={`mean(rnorm(1000))\nplot(rnorm(100))`}
+        defaultValue="mean(rnorm(1000))"
         className="w-full p-2 border rounded"
       />
       <button
-        onClick={onRun}
-        disabled={!ready}
-        className={`mt-2 px-4 py-2 rounded ${ready ? "bg-blue-600 text-white" : "bg-gray-300 text-gray-600"}`}
-        type="button"
+        id="runR"
+        className="mt-2 px-4 py-2 bg-blue-600 text-white rounded"
       >
-        {ready ? "Run R" : "Loading…"}
+        Run R
       </button>
-      <pre id="rOutput" className="mt-2 p-2 bg-gray-100 rounded whitespace-pre-wrap">{msg}</pre>
-
-      {/* Use <img> instead of <canvas> to dodge cross-origin canvas rules */}
-      <img id="rPlotImg" alt="R plot" className="mt-2 border max-w-full h-auto" />
+      <pre id="rOutput" className="mt-2 p-2 bg-gray-100 rounded"></pre>
+      <canvas
+        id="rPlot"
+        width="640"
+        height="480"
+        className="mt-2 border"
+      ></canvas>
     </PageShell>
   );
 };

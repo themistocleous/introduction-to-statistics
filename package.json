@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@r-wasm/webr": "^0.2.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -13,17 +14,17 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webr": "^0.5.5"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "tailwind:init": "tailwindcss init -p",
-    "postinstall": "rm -rf public/webr && mkdir -p public/webr && cp -r node_modules/@r-wasm/webr/dist/* public/webr/"
+"scripts": {
+  "start": "craco start",
+  "build": "craco build",
+  "test": "craco test",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
+  "eject": "react-scripts eject",
+  "tailwind:init": "tailwindcss init -p"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +50,7 @@
     "autoprefixer": "^10.4.21",
     "gh-pages": "^6.3.0",
     "postcss": "^8.5.6",
+    "shx": "^0.4.0",
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7"
   }
