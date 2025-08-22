@@ -1,17 +1,1 @@
-
-const macros = {
-    "\\R": "\\textsf{R}",
-    "\\mbox": "\\text",
-    "\\code": "\\texttt"
-};
-
-function processMathHTML()
-{
-    var i, l = document.getElementsByClassName('reqn');
-    var opts = { throwOnError: false, macros: macros };
-    for (i = 0; i < l.length; i++) {
-	katex.render(l[i].textContent, l[i], opts);
-    }
-    return;
-}
-
+const macros={"\\R":"\\textsf{R}","\\mbox":"\\text","\\code":"\\texttt"};function processMathHTML(){var t,e=document.getElementsByClassName("reqn"),o={throwOnError:!1,macros:macros};for(t=0;t<e.length;t++)katex.render(e[t].textContent,e[t],o)}
