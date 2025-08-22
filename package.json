@@ -17,14 +17,14 @@
     "web-vitals": "^2.1.4",
     "webr": "^0.5.5"
   },
-"scripts": {
-  "start": "craco start",
-  "build": "craco build",
-  "test": "craco test",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build",
-  "eject": "react-scripts eject",
-  "tailwind:init": "tailwindcss init -p"
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "eject": "react-scripts eject",
+    "tailwind:init": "tailwindcss init -p"
   },
   "eslintConfig": {
     "extends": [

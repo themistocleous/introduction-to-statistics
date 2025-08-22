@@ -72,13 +72,6 @@ const HomePage = ({ navigateTo }) => {
             <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-blue-400 dark:via-purple-400 dark:to-blue-500 bg-clip-text text-transparent mb-4 animate-fade-in">
               Welcome
             </h1>
-            <a
-  href={(process.env.PUBLIC_URL || "") + "/webr/webr-worker.js"}
-  target="_blank"
-  rel="noreferrer"
->
-  Open webr-worker.js (new tab)
-</a>
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-600 via-blue-600 to-purple-600 dark:from-indigo-400 dark:via-blue-400 dark:to-purple-500 bg-clip-text text-transparent animate-fade-in-delay">
               Introduction to Statistics
             </h1>
@@ -158,57 +151,57 @@ const HomePage = ({ navigateTo }) => {
       </div>
 
       {/* CSS animations */}
-      <style jsx>{`
-        /* Define CSS variables for the radial gradient and grid color */
-        :global(:root) {
-          --mouse-x: 50%;
-          --mouse-y: 50%;
-          --grid-color: rgba(59, 130, 246, 0.05); /* Light blue for light mode */
-          --light-gradient: radial-gradient(circle at var(--mouse-x) var(--mouse-y), 
-                                   rgba(59, 130, 246, 0.1) 0%, 
-                                   rgba(147, 51, 234, 0.05) 25%, 
-                                   rgba(16, 185, 129, 0.05) 50%, 
-                                   transparent 70%);
-          --dark-gradient: radial-gradient(circle at var(--mouse-x) var(--mouse-y), 
-                                  rgba(59, 130, 246, 0.15) 0%, 
-                                  rgba(147, 51, 234, 0.1) 25%, 
-                                  rgba(16, 185, 129, 0.1) 50%, 
-                                  transparent 70%);
-        }
+<style>{`
+  /* Define CSS variables for the radial gradient and grid color */
+  :root {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    --grid-color: rgba(59, 130, 246, 0.05); /* Light blue for light mode */
+    --light-gradient: radial-gradient(circle at var(--mouse-x) var(--mouse-y), 
+                             rgba(59, 130, 246, 0.1) 0%, 
+                             rgba(147, 51, 234, 0.05) 25%, 
+                             rgba(16, 185, 129, 0.05) 50%, 
+                             transparent 70%);
+    --dark-gradient: radial-gradient(circle at var(--mouse-x) var(--mouse-y), 
+                            rgba(59, 130, 246, 0.15) 0%, 
+                            rgba(147, 51, 234, 0.1) 25%, 
+                            rgba(16, 185, 129, 0.1) 50%, 
+                            transparent 70%);
+  }
 
-        :global([data-theme="dark"]) {
-          --grid-color: rgba(30, 58, 138, 0.1); /* Darker/muted blue for dark mode */
-        }
+  [data-theme="dark"] {
+    --grid-color: rgba(30, 58, 138, 0.1); /* Darker/muted blue for dark mode */
+  }
 
-        .radial-gradient-overlay {
-          position: absolute;
-          inset: 0;
-          transition: background 0.3s ease-out;
-          background: var(--light-gradient);
-        }
+  .radial-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    transition: background 0.3s ease-out;
+    background: var(--light-gradient);
+  }
 
-        :global([data-theme="dark"]) .radial-gradient-overlay {
-          background: var(--dark-gradient);
-        }
+  [data-theme="dark"] .radial-gradient-overlay {
+    background: var(--dark-gradient);
+  }
 
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes expand {
-          from { width: 0; }
-          to { width: 8rem; }
-        }
-        
-        .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
-        .animate-fade-in-delay { animation: fade-in 0.8s ease-out 0.2s forwards; }
-        .animate-fade-in-delay-2 { animation: fade-in 0.8s ease-out 0.4s forwards; }
-        .animate-fade-in-delay-3 { animation: fade-in 0.8s ease-out 0.6s forwards; }
-        .animate-fade-in-delay-4 { animation: fade-in 0.8s ease-out 0.8s forwards; }
-        .animate-fade-in-delay-5 { animation: fade-in 0.8s ease-out 1s forwards; }
-        .animate-expand { animation: expand 0.8s ease-out 0.4s forwards; }
-      `}</style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes expand {
+    from { width: 0; }
+    to { width: 8rem; }
+  }
+  
+  .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
+  .animate-fade-in-delay { animation: fade-in 0.8s ease-out 0.2s forwards; }
+  .animate-fade-in-delay-2 { animation: fade-in 0.8s ease-out 0.4s forwards; }
+  .animate-fade-in-delay-3 { animation: fade-in 0.8s ease-out 0.6s forwards; }
+  .animate-fade-in-delay-4 { animation: fade-in 0.8s ease-out 0.8s forwards; }
+  .animate-fade-in-delay-5 { animation: fade-in 0.8s ease-out 1s forwards; }
+  .animate-expand { animation: expand 0.8s ease-out 0.4s forwards; }
+`}</style>
 
     </PageShell>
   );
