@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/introduction-to-statistics/static/css/main.f8b219d7.css",
+    "main.js": "/introduction-to-statistics/static/js/main.47673ba6.js",
+    "static/js/453.fee8ba61.chunk.js": "/introduction-to-statistics/static/js/453.fee8ba61.chunk.js",
+    "static/media/ns.png": "/introduction-to-statistics/static/media/ns.87eea7d8da919477a49e.png",
+    "index.html": "/introduction-to-statistics/index.html",
+    "main.f8b219d7.css.map": "/introduction-to-statistics/static/css/main.f8b219d7.css.map",
+    "main.47673ba6.js.map": "/introduction-to-statistics/static/js/main.47673ba6.js.map",
+    "453.fee8ba61.chunk.js.map": "/introduction-to-statistics/static/js/453.fee8ba61.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f8b219d7.css",
+    "static/js/main.47673ba6.js"
+  ]
+}
